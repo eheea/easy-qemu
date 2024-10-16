@@ -10,7 +10,7 @@ echo "1-yes"
 echo "2-no"
 read -r answer0
 case $answer0 in
-1)if [ -f /usr/bin/pacman ]; then
+1) if [ -f /usr/bin/pacman ]; then
 sudo pacman -S wget --noconfirm
 fi
 
@@ -44,7 +44,7 @@ sudo pacman -S qemu-full libvirt virt-install virt-manager virt-viewer \
     edk2-ovmf swtpm qemu-img guestfs-tools libosinfo wget dnsmasq --noconfirm
 yay -S tuned --noconfirm
 
-mv virtio-win-* /var/lib/libvirt/images
+sudo mv virtio-win-* /var/lib/libvirt/images
 
 for drv in qemu interface network nodedev nwfilter secret storage; do \
     sudo systemctl enable virt${drv}d.service; \
@@ -79,15 +79,21 @@ sudo systemctl enable libvirtd.service
 
 #configuring tuneD
 sudo systemctl enable --now tuned
+if [ $? -eq 0 ]; then
+echo "tuneD was successfully enabled"
+else echo "tuneD failed"
+fi
 sudo tuned-adm profile virtual-host
 sudo tuned-adm verify
 
 #setting up default network
 sudo virsh net-start default
 sudo virsh net-autostart default
+echo "default network was started"
 
 #giving the user permissions to use KVM/QEMU
 sudo usermod -aG libvirt "$USER"
+echo "user was added to libvirt group"
 echo "export LIBVIRT_DEFAULT_URI='qemu:///system'" >> ~/.bashrc
 source ~/.bashrc
 
