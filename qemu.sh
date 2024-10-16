@@ -108,7 +108,6 @@ sudo setfacl -m d:u:"$USER":rwx /var/lib/libvirt/images
 #setting up default network
 sudo virsh net-start default
 sudo virsh net-autostart default
-echo "default network was started"
 
 
 echo "         "
