@@ -79,19 +79,22 @@ sudo systemctl enable libvirtd.service
 
 #configuring tuneD
 sudo systemctl enable --now tuned
-if [ $? -eq 0 ]; then
-echo "tuneD was successfully enabled"
-else echo "tuneD failed"
-fi
 sudo tuned-adm profile virtual-host
 sudo tuned-adm verify
 
-#setting up default network
-sudo virsh net-start default
-sudo virsh net-autostart default
-echo "default network was started"
-
 #giving the user permissions to use KVM/QEMU
+if [ -f /usr/bin/pacman ]; then
+virsh uri
+sudo virsh uri
+systemctl start virtqemud.socket
+fi
+
+if [ -f /usr/bin/dnf ]; then
+virsh uri
+sudo virsh uri
+systemctl start virtqemud.socket
+fi
+
 sudo usermod -aG libvirt "$USER"
 echo "user was added to libvirt group"
 echo "export LIBVIRT_DEFAULT_URI='qemu:///system'" >> ~/.bashrc
@@ -101,6 +104,12 @@ source ~/.bashrc
 sudo setfacl -R -b /var/lib/libvirt/images
 sudo setfacl -R -m u:"$USER":rwX /var/lib/libvirt/images
 sudo setfacl -m d:u:"$USER":rwx /var/lib/libvirt/images
+
+#setting up default network
+sudo virsh net-start default
+sudo virsh net-autostart default
+echo "default network was started"
+
 
 echo "         "
 echo -e "\033[0;32mit is recommened that you reboot your pc. do you want to do it now?\033[0m"
@@ -112,7 +121,6 @@ case $answer in
 2) echo -e "\033[0;32mKVM/QEMU was successfully installed. please reboot when possible\033[0m" ;;
 esac
 ;;
-
 
 
 
@@ -136,8 +144,6 @@ fi
 sudo pacman -S qemu-full libvirt virt-install virt-manager virt-viewer \
     edk2-ovmf swtpm qemu-img guestfs-tools libosinfo wget dnsmasq --noconfirm
 yay -S tuned --noconfirm
-
-mv virtio-win-* /var/lib/libvirt/images
 
 for drv in qemu interface network nodedev nwfilter secret storage; do \
     sudo systemctl enable virt${drv}d.service; \
@@ -165,8 +171,6 @@ sudo apt install qemu-system-x86 libvirt-daemon-system virtinst \
     virt-manager virt-viewer ovmf swtpm qemu-utils guestfs-tools \
     libosinfo-bin tuned wget -y
 
-mv virtio-win-* /var/lib/libvirt/images
-
 sudo systemctl enable libvirtd.service
  fi
 
@@ -175,11 +179,20 @@ sudo systemctl enable --now tuned
 sudo tuned-adm profile virtual-host
 sudo tuned-adm verify
 
-#setting up default network
-sudo virsh net-start default
-sudo virsh net-autostart default
-
 #giving the user permissions to use KVM/QEMU
+if [ -f /usr/bin/pacman ]; then
+virsh uri
+sudo virsh uri
+systemctl start virtqemud.socket
+fi
+
+if [ -f /usr/bin/dnf ]; then
+virsh uri
+sudo virsh uri
+systemctl start virtqemud.socket
+fi
+
+
 sudo usermod -aG libvirt "$USER"
 echo "export LIBVIRT_DEFAULT_URI='qemu:///system'" >> ~/.bashrc
 source ~/.bashrc
@@ -188,6 +201,10 @@ source ~/.bashrc
 sudo setfacl -R -b /var/lib/libvirt/images
 sudo setfacl -R -m u:"$USER":rwX /var/lib/libvirt/images
 sudo setfacl -m d:u:"$USER":rwx /var/lib/libvirt/images
+
+#setting up default network
+sudo virsh net-start default
+sudo virsh net-autostart default
 
 echo "         "
 echo -e "\033[0;32mit is recommened that you reboot your pc. do you want to do it now?\033[0m"
