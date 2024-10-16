@@ -1,6 +1,17 @@
 #!/bin/bash
-
-
+echo "welcome to easy qemu script"
+echo -e "\033[0;32mdo you want 'virtio-win' image (very important to set up windows virtual machines)\033[0m"
+echo "        "
+echo "*if you already have it you can select no"
+echo "          "
+echo "*if youre not sure what to do select yes"
+echo "                       "
+echo "1-yes"
+echo "2-no"
+read -r answer0
+case $answer0 in
+1) wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso ;;
+2) 
 #checking virtulization support
 lscpu | grep Virtualization > .support.txt
 if ! grep -q -i AMD-V .support.txt || grep -q -i VT-x .support.txt ; then
@@ -21,7 +32,6 @@ sudo pacman -S qemu-full libvirt virt-install virt-manager virt-viewer \
     edk2-ovmf swtpm qemu-img guestfs-tools libosinfo wget dnsmasq --noconfirm
 yay -S tuned --noconfirm
 
-wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso
 mv virtio-win-* /var/lib/libvirt/images
 
 for drv in qemu interface network nodedev nwfilter secret storage; do \
@@ -36,7 +46,6 @@ sudo dnf install qemu-kvm libvirt virt-install virt-manager virt-viewer \
     edk2-ovmf swtpm qemu-img guestfs-tools libosinfo tuned wget -y
 sudo dnf group install --with-optional virtualization -y
 
-wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso
 mv virtio-win-* /var/lib/libvirt/images
 
 for drv in qemu interface network nodedev nwfilter secret storage; do \
@@ -51,7 +60,6 @@ sudo apt install qemu-system-x86 libvirt-daemon-system virtinst \
     virt-manager virt-viewer ovmf swtpm qemu-utils guestfs-tools \
     libosinfo-bin tuned wget -y
 
-wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso
 mv virtio-win-* /var/lib/libvirt/images
 
 sudo systemctl enable libvirtd.service
@@ -84,4 +92,9 @@ read -r answer
 case $answer in
 1) reboot ;;
 2) echo -e "\033[0;32mKVM/QEMU was successfully installed. please reboot when possible\033[0m" ;;
+esac
+
+;;
+*) echo "you didnt enter an appropriate option. please try again"
+exit 3
 esac
