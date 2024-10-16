@@ -10,7 +10,19 @@ echo "1-yes"
 echo "2-no"
 read -r answer0
 case $answer0 in
-1) wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso
+1)if [ -f /usr/bin/pacman ]; then
+sudo pacman -S wget --noconfirm
+fi
+
+if [ -f /usr/bin/dnf ]; then
+sudo dnf in wget -y
+fi
+
+if [ -f /usr/bin/apt ]; then
+sudo apt install wget -y
+fi
+
+wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso
 
 #checking virtulization support
 lscpu | grep Virtualization > .support.txt
