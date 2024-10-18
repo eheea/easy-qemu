@@ -1,6 +1,12 @@
 #!/bin/bash
 echo "your system will reboot after this script. make sure to close and save everything you have running"
 echo "after rebooting run the post-restart.sh script to complete the install"
+echo "do you wish to continue"
+echo "1-yes"
+echo "2-no"
+read -r num
+case $num in
+1)
 
 #checking virtulization support
 lscpu | grep Virtualization > .support.txt
@@ -66,3 +72,8 @@ sudo tuned-adm verify
 echo "system will reboot now"
 sleep 2
 reboot
+;;
+2) echo "have a nice day i guess"
+exit 0 ;;
+*) echo "you didnt enter a proper number" ;;
+esac
