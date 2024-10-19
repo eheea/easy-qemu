@@ -1,8 +1,8 @@
 # easy qemu
  ### QEMU installation script
 
-- # a script that makes installing QEMU easier
-...
+# a script that makes installing QEMU easier
+
 
 ## how to use the script
 #### for ubuntu/debian users
@@ -15,4 +15,6 @@
 2. in terminal type `git clone https://github.com/eheea/easy-qemu && cd easy-qemu/fedora.arch/ && ./qemu.sh`
 3. after the system restarts run this command `cd easy-qemu/fedora.arch/ && ./post-restart.sh`
 
+
+.........................................................................
 * im open to suggestions as to how to avoid restarting on fedora and arch.
