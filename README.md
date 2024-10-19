@@ -1,6 +1,4 @@
-# easy qemu
-a script that makes installing QEMU easier
-----------------------------------------------
+# a script that makes installing QEMU easier
 
 
 ## how to use the script
