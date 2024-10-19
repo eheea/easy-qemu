@@ -1,9 +1,9 @@
 # easy QEMU
 
 == a script that makes installing QEMU/KVM easier.
-note that this script dosent automate gpu passthru as thats a whole different thing.
-this is a base install of all the tools you need to make windows and linux VM's.
-check the yt list in the bottom to learn more about gpu passthru.
+- note that this script dosent automate gpu passthru as thats a whole different thing.
+- this is a base install of all the tools you need to make windows and linux VM's.
+- check the yt list in the bottom to learn more about gpu passthru.
 
 
 ## how to use
