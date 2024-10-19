@@ -9,6 +9,7 @@ a script that makes installing QEMU/KVM easier.
 1. make sure git is installed on your system. you can use `sudo apt install git` to get it if not already installed.
 2. in terminal type `git clone https://github.com/eheea/easy-qemu && cd easy-qemu/ubuntu/ && chmod +x ./* && ./qemu.sh`.
 
+---------
 
 
 ### for fedora/arch users
