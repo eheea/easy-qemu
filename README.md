@@ -19,6 +19,8 @@
 3. after the system restarts open up a terminal and run this command `cd easy-qemu/fedora.arch/ && ./post-restart.sh`.
 
 
+---
+== credits
 * all credit goes to sysguides https://www.youtube.com/@SysGuides as this code is a simplified version of his video.
 - the video https://www.youtube.com/watch?v=LHJhFW7_8EI.
 
