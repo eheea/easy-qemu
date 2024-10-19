@@ -1,10 +1,9 @@
 # easy QEMU
 
-== description
-a script that makes installing QEMU/KVM easier.
+== a script that makes installing QEMU/KVM easier.
 
 
-== how to use
+## how to use
 #### for ubuntu/debian users
 1. make sure git is installed on your system. you can use `sudo apt install git` to get it if not already installed.
 2. in terminal type `git clone https://github.com/eheea/easy-qemu && cd easy-qemu/ubuntu/ && chmod +x ./* && ./qemu.sh`.
