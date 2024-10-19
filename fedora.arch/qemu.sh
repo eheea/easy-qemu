@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 echo "your system will reboot after this script. make sure to close and save everything you have running"
 echo "after rebooting run the post-restart.sh script to complete the install"
 echo "do you wish to continue"
