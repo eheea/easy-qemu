@@ -70,7 +70,7 @@ sudo systemctl enable --now tuned
 sudo tuned-adm profile virtual-host
 sudo tuned-adm verify
 
-echo "system will reboot now"
+echo -e "\e[33msystem will reboot now\e[0m"
 sleep 2
 reboot
 ;;
