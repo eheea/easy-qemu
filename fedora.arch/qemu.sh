@@ -22,10 +22,10 @@ fi
 if [ -f /usr/bin/pacman ]; then
 echo "checking if AUR helpers exists"
 if [ ! -f /usr/bin/yay ]; then
-sudo pacman -S --noconfirm --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay
+sudo pacman -Sy --noconfirm --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm && cd .. && rm -rf yay
 else echo "AUR helper already exists"
 fi
-sudo pacman -S qemu-full libvirt virt-install virt-manager virt-viewer \
+sudo pacman -Sy qemu-full libvirt virt-install virt-manager virt-viewer \
     edk2-ovmf swtpm qemu-img guestfs-tools libosinfo wget dnsmasq --noconfirm
 yay -S tuned --noconfirm
 
