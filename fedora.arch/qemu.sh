@@ -9,14 +9,6 @@ read -r num
 case $num in
 1)
 
-#checking virtulization support
-lscpu | grep Virtualization > .support.txt
-if ! grep -q -i AMD-V .support.txt || grep -q -i VT-x .support.txt ; then
-echo "Virtulization support it turned off in the bios settings (mainly VT-D,VT-X for intel cpus and SVM for AMD cpus ). turn it on and try again"
-exit 2
-else 
-echo "virtulization is supported."
-fi
 
 #installing packages for arch
 if [ -f /usr/bin/pacman ]; then
